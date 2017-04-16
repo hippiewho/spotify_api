@@ -27,16 +27,25 @@
         <hr>
         <!-- Details -->
         <div ng-if="albumresult" class="results-block container">
-          <div ng-repeat="album in albumresult.items">
-            <div class="row">
-              <div class="show-name col-md-12">{{album.name}}</div>
-            </div>
-            <div class="row">
-              <div class="col-md-3">
-                <img ng-src="{{album.images[1].url}}" />
+          <h1 class="text-center">{{artistname}}</h2>
+            <div ng-repeat="album in albumresult.items">
+              <div class="row">
+                <div class="show-name col-md-12">{{album.name}}</div>
               </div>
+              <div class="row">
+                <div ng-if="album.images">
+                  <div class="col-md-3">
+                    <img ng-src="{{album.images[1].url}}" />
+                  </div>
+                </div>
+                <div ng-if="album.images == undefined" class="row">
+                  <div class="col-md-3">
+                    <img ng-src="https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/128/_Unknown.png" />
+                  </div>
+                </div>
+              </div>
+              <br><br>
             </div>
-          </div>
         </div>
         <!-- Albums-->
         <div ng-if="results.albums" class="results-block">
@@ -65,25 +74,39 @@
         <!-- Artists -->
         <div ng-if="results.artists" class="results-block">
           <div ng-repeat="artist in results.artists.items">
-            
-            <div class="row"><div class="show-name col-md-12">{{artist.name}}</div></div>
 
-            <div class="container"><div class="row">
+            <div class="row">
+              <div class="show-name col-md-12">{{artist.name}}</div>
+            </div>
+
+            <div class="container">
+              <div class="row">
                 <span ng-repeat="genre in artist.genres">{{genre}} | </span>
-            </div></div>
+              </div>
+            </div>
 
-            <div class="col-md-3"><img ng-src="{{artist.images[2].url}}" /></div>
+            <div class="col-md-3">
+              <div ng-if="artist.images[2].url">
+                <img ng-src="{{artist.images[2].url}}" />
+              </div>
+              <div ng-if="artist.images[2].url == undefined" class="row">
+                <div class="col-md-3">
+                  <img ng-src="https://cdn1.iconfinder.com/data/icons/rounded-flat-country-flag-collection-1/128/_Unknown.png" />
+                </div>
+              </div>
+            </div>
 
             <div class="row"></div>
 
             <div class="container">
               <div class="row">
-                <button ng-click="showDetails('artists' , artist.id)" class="btn btn-info pull-left col-md-3">Details</button>
+                <button ng-click="showDetails('artists' , artist.id, artist.name)" class="btn btn-info pull-left col-md-3">Details</button>
               </div>
             </div>
+            <br><br>
           </div>
         </div>
-          <hr>
+        <hr>
         <!-- Tracks -->
         <div ng-if="results.tracks" class="results-block">
           <div ng-repeat="track in results.tracks.items">

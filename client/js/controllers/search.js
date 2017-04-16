@@ -15,9 +15,10 @@ angular
             }
         }
 
-        $scope.showDetails = (type, id) => {
+        $scope.showDetails = (type, id, artist) => {
             console.log(type + "id: " + id)
             $scope.results = null
+            $scope.artistname = artist
             AlbumService.album.query({
                 id: id,
                 type: type
