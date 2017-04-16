@@ -1,0 +1,138 @@
+<div class="search-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <form>
+          <h2 class="v-center">search</h2>
+          <p class="lead">Artist Details</p>
+          <hr>
+          <!-- Search Input Group -->
+          <span class="input-group container">
+            <span class="input-group">
+              <span class="input-group-addon">Search Term</span>
+          <input type="text" ng-model="artistName" class="form-control" id="searchterm" />
+          </span>
+          <br>
+          <select class="form-control" id="typeSelect" ng-model="type">
+                <option selected="selected">Artist</option>
+                <option>Album</option>
+                <option>Track</option>
+                <option>Playlist</option>
+            </select>
+          <br>
+          <button type="button" class="btn btn-md btn-warning pull-right" ng-click="searcArtist()">Search</button>
+          </span>
+        </form>
+        <hr>
+        <!-- Details -->
+        <div ng-if="albumresult" class="results-block container">
+          <div ng-repeat="album in albumresult.items">
+            <div class="row">
+              <div class="show-name col-md-12">{{album.name}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <img ng-src="{{album.images[1].url}}" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Albums-->
+        <div ng-if="results.albums" class="results-block">
+          <div ng-repeat="album in results.albums.items">
+            <div class="row">
+              <div class="show-name col-md-12"> {{album.artists[0].name }} - {{album.name}}</div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <img ng-src="{{album.images[1].url}}" />
+              </div>
+              <!--<div class="col-md-8">
+                  <div ng-bind-html="result.show.summary | trustHTML"></div>
+                </div>-->
+            </div>
+            <br>
+            <div class="container">
+              <div class="row">
+                <button class="btn btn-info pull-left col-md-3" ng-click="showDetails('albums', album.id)">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Artists -->
+        <div ng-if="results.artists" class="results-block">
+          <div ng-repeat="artist in results.artists.items">
+            
+            <div class="row"><div class="show-name col-md-12">{{artist.name}}</div></div>
+
+            <div class="container"><div class="row">
+                <span ng-repeat="genre in artist.genres">{{genre}} | </span>
+            </div></div>
+
+            <div class="col-md-3"><img ng-src="{{artist.images[2].url}}" /></div>
+
+            <div class="row"></div>
+
+            <div class="container">
+              <div class="row">
+                <button ng-click="showDetails('artists' , artist.id)" class="btn btn-info pull-left col-md-3">Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <hr>
+        <!-- Tracks -->
+        <div ng-if="results.tracks" class="results-block">
+          <div ng-repeat="track in results.tracks.items">
+
+            <div class="row">
+              <div class="show-name col-md-8"> {{track.name}}</div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-8">
+
+
+                <div>
+                  <button ng-click="showDetails('tracks' , track.id)">Details</button>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+          </div>
+        </div>
+        <!-- Playlists -->
+        <div ng-if="results.playlists" class="results-block">
+          <div ng-repeat="playlist in results.playlists.items">
+
+            <div class="row">
+              <div class="show-name col-md-8"> {{playlist.name}}</div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3">
+                <img ng-src="{{item.images[1].url}}" />
+              </div>
+
+              <div class="col-md-8">
+                <div>
+                  <button ng-click="showDetails(result.show.id)">Details</button>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
